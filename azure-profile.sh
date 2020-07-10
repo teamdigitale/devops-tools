@@ -7,26 +7,26 @@ function docker_run {
     teamdigitale/devops-tools:latest $@
 }
 
-function az {
+az() {
   docker_run az $@
 }
 
-function terraform {
+terraform() {
   docker_run terraform $@
 }
 
-function terragrunt {
+terragrunt() {
   docker_run terragrunt $@
 }
 
-function kubectl {
+kubectl() {
   docker_run kubectl $@
 }
 
-function helm {
+helm() {
   docker_run helm $@
 }
 
-function aks-config-download {
+aks-config-download() {
   docker_run aks-config-download $@
 }
