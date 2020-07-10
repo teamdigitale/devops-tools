@@ -1,9 +1,10 @@
 function docker_run {
   docker run --rm -it \
+    -u $UID:$(id -g) \
     -v $PWD:/devops \
-    -v $HOME/.kube:/root/.kube \
-    -v $HOME/.azure:/root/.azure \
-    -v $HOME/.local/bin:/root/.local/bin \
+    -v $HOME/.kube:/.kube \
+    -v $HOME/.azure:/.azure \
+    -v $HOME/.local/bin:/usr/local/bin \
     teamdigitale/devops-tools:latest $@
 }
 
