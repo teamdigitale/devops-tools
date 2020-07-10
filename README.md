@@ -6,7 +6,7 @@ The tools do not require any software pre-installed on your machine, but Docker.
 
 You can pull the container and run commands inside it or execute commands directly from your computer, sourcing the [azure-profile.sh](azure-profile.sh) script. Each command will bring up the "DevOps toolkit container" and execute the command inside it.
 
-## TL;TR
+## TL;DR
 
 ```shell
 source azure-profile.sh # strongly suggested to put it in your ~/.bash_profile or ~/.bashrc
