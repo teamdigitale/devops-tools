@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+
+  # Devops Tools
+  devops_tools:
+    container_name: devops_tools
+    image: teamdigitale/devops-tools
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - .:/devops
+      - ${HOME}/.kube:/root/.kube \
+      - ${HOME}/.azure:/root/.azure \
+      - ${HOME}/.local/bin:/root/.local/bin
