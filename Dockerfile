@@ -16,7 +16,7 @@ RUN apk update \
 
 # Configure completion
 RUN mkdir -p /etc/bash_completion.d/
-RUN echo -e `\nsource /usr/share/bash-completion/bash_completion` >> ~/.bashrc
+RUN echo -e "\nsource /usr/share/bash-completion/bash_completion" >> ~/.bashrc
 
 FROM requirements AS terraform
 
@@ -40,7 +40,7 @@ RUN chmod +x kubectl
 RUN mv kubectl /usr/local/bin/kubectl
 
 # Configure Kubectl completion
-RUN echo -e 'source <(kubectl completion bash)' >> ~/.bashrc
+RUN echo -e "source <(kubectl completion bash)" >> ~/.bashrc
 RUN kubectl completion bash >/etc/bash_completion.d/kubectl
 
 # Install Helm
@@ -51,7 +51,7 @@ RUN chmod +x linux-amd64/helm
 RUN mv linux-amd64/helm /usr/local/bin/
 
 # Configure Helm completion
-RUN echo -e 'source <(helm completion bash)' >> ~/.bashrc
+RUN echo -e "source <(helm completion bash)" >> ~/.bashrc
 RUN helm completion bash >/etc/bash_completion.d/helm
 
 FROM kubernetes AS scripts

@@ -31,6 +31,14 @@ source azure-profile.sh # strongly suggested to put it in your ~/.bash_profile o
 
 * helm 3.3.0-rc.1
 
+## aks-config-download.sh
+
+Often you're required to download the AKS config for one of the Team's clusters. It's a simple but convoluted operation. The [aks-config-download.sh tool](aks-config-download.sh) simplifies the procedure:
+
+```shell
+aks-config-download {dpt-services | devita}
+```
+
 ## Want the container only?
 
 ```shell
