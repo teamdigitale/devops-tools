@@ -1,10 +1,18 @@
+dpt_bogus_path=${1:-"~/dpt-bogus"}
+
 function docker_run {
   docker run --rm -it \
     -v $PWD:/devops \
     -v $HOME/.kube:/root/.kube \
     -v $HOME/.azure:/root/.azure \
     -v $HOME/.local/bin:/root/.local/bin \
+    -v $HOME/.gnupg:/root/.gnupg \
+    -v $dpt_bogus_path:/root/.password-store \
     teamdigitale/devops-tools:latest $@
+}
+
+pass() {
+  docker_run pass $@
 }
 
 az() {

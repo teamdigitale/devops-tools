@@ -8,11 +8,29 @@ You can pull the container and run commands inside it or execute commands direct
 
 ## TL;DR
 
+Execute commands from your machine (recommended)
+
 ```shell
-source azure-profile.sh # strongly suggested to put it in your ~/.bash_profile or ~/.bashrc
+# Strongly suggested to put it in your ~/.bash_profile or ~/.bashrc
+source azure-profile.sh PATH_TO_YOUR DPT_BOGUS
+
+# Note: if PATH_TO_YOUR DPT_BOGUS is not set it defaults to ~/dpt-bogus
 
 # Done! Execute the commands you need
-# { az | terraform | terragrunt | helm | aks-config-download }
+# { az | pass | terraform | terragrunt | helm | aks-config-download }
+```
+
+Bring the container environment up manually with docker-compose and execute commands inside the container
+
+```shell
+DPT_BOGUS_PATH=YOUR_PATH_TO_YOUR_LOCAL_DPT_BOGUS_REPO docker-compose up -d
+docker exec -it devops_tools /bin/bash
+
+# Note: if DPT_BOGUS_PATH is not set it defaults to ~/dpt-bogus
+
+# Exit and stop the container
+exit
+docker-compose down
 ```
 
 ## Requirements
@@ -21,7 +39,9 @@ source azure-profile.sh # strongly suggested to put it in your ~/.bash_profile o
 
 ## What commands/tools are supported
 
-* az
+* az (latest image available)
+
+* pass 1.7.3
 
 * terraform 0.11.14
 

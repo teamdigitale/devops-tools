@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.8'
 
 services:
 
@@ -9,10 +9,14 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+    environment:
+      - DPT_BOGUS_PATH=~/dpt-bogus
     restart: unless-stopped
     tty: true
     volumes:
-      - .:/devops
-      - ${HOME}/.kube:/root/.kube \
-      - ${HOME}/.azure:/root/.azure \
-      - ${HOME}/.local/bin:/root/.local/bin
+      - .:/devops:cached,rw
+      - ${HOME}/.kube:/root/.kube:rw
+      - ${HOME}/.azure:/root/.azure:rw
+      - ${HOME}/.local/bin:/root/.local/bin:rw
+      - ${HOME}/.gnupg:/root/.gnupg:rw
+      - ${DPT_BOGUS_PATH}:/root/.password-store:rw

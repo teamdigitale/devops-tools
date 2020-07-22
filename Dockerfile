@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/azure-cli:latest AS base
 
+ENV PASS_VERSION 1.7.3
 ENV TERRAFORM_VERSION 0.11.14
 ENV TERRAGRUNT_VERSION 0.18.2
 ENV KUBECTL_VERSION 1.18.0
@@ -11,14 +12,24 @@ FROM base AS requirements
 
 # Install requirements
 RUN apk update \
- && apk add vim \
-            bash-completion
+ && apk add bash-completion \
+            gnupg \
+            tree \
+            vim
 
 # Configure completion
 RUN mkdir -p /etc/bash_completion.d/
 RUN echo -e "\nsource /usr/share/bash-completion/bash_completion" >> ~/.bashrc
 
-FROM requirements AS terraform
+FROM requirements AS pass
+
+# Install password-store (pass)
+RUN wget https://git.zx2c4.com/password-store/snapshot/password-store-${PASS_VERSION}.zip
+RUN unzip password-store-${PASS_VERSION}.zip
+RUN cd password-store-${PASS_VERSION} && make install
+RUN rm -rf password-store-${PASS_VERSION} password-store-${PASS_VERSION}.zip
+
+FROM pass AS terraform
 
 # Install Terraform
 RUN curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
