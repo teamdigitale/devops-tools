@@ -9,12 +9,10 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    environment:
-      - DPT_BOGUS_PATH=~/dpt-bogus
     restart: unless-stopped
     tty: true
     volumes:
-      - .:/devops:cached,rw
+      - .:/devops:rw
       - ${HOME}/.kube:/root/.kube:rw
       - ${HOME}/.azure:/root/.azure:rw
       - ${HOME}/.local/bin:/root/.local/bin:rw

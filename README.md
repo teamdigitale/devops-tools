@@ -12,12 +12,12 @@ Execute commands from your machine (recommended)
 
 ```shell
 # Strongly suggested to put it in your ~/.bash_profile or ~/.bashrc
-source azure-profile.sh PATH_TO_YOUR DPT_BOGUS
+source azure-profile.sh [PATH_TO_YOUR DPT_BOGUS]
 
 # Note: if PATH_TO_YOUR DPT_BOGUS is not set it defaults to ~/dpt-bogus
 
 # Done! Execute the commands you need
-# { az | pass | terraform | terragrunt | helm | aks-config-download }
+# { az | pass | terraform | terragrunt | kubectl | helm | aks-config-download }
 ```
 
 Bring the container environment up manually with docker-compose and execute commands inside the container
@@ -50,6 +50,16 @@ docker-compose down
 * kubectl 1.18.0
 
 * helm 3.3.0-rc.1
+
+## Volumes
+
+Different volumes are mounted in the container. You can see the full list in the [docker-compose.yml file](docker-compose.yml) in the volumes section.
+
+## kubectl cp
+
+*kubectl cp* allows users to upload and download files from remote containers.
+Unless the local path where you copy files from/to corresponds to one of the volumes mounted in your container, files will only persist inside it, so you won't be able to see them on the host machine.
+For this reason, you should always use the local */devops* folder while using *kubectl cp*. This will transfer files from/to the folder on the host machine where you've launched docker-compose or the command from.
 
 ## aks-config-download.sh
 

@@ -1,4 +1,4 @@
-dpt_bogus_path=${1:-"~/dpt-bogus"}
+dpt_bogus_path=${1:-"$HOME/dpt-bogus"}
 
 function docker_run {
   docker run --rm -it \
