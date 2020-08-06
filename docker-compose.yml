@@ -11,6 +11,10 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     tty: true
+    ports:
+      - "3000:3000"
+      - "9090:9090"
+      - "9093:9093"
     volumes:
       - .:/devops:rw
       - ${HOME}/.kube:/root/.kube:rw

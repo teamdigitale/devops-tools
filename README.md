@@ -61,6 +61,18 @@ Different volumes are mounted in the container. You can see the full list in the
 Unless the local path where you copy files from/to corresponds to one of the volumes mounted in your container, files will only persist inside it, so you won't be able to see them on the host machine.
 For this reason, you should always use the local */devops* folder while using *kubectl cp*. This will transfer files from/to the folder on the host machine where you've launched docker-compose or the command from.
 
+## kubectl port-forward
+
+You may need to use the command `kubectl port-forward`. In order to do so from your host machine, remember to add the parameter `--address 0.0.0.0` to your command.
+
+This is an example of a connection from your host to a Prometheus installation:
+
+```shell
+kubectl -n monitoring port-forward --address 0.0.0.0 prometheus-prometheus-prometheus-oper-prometheus-0 9090
+```
+
+>Note: to make this possible, both the [azure-profile.sh](azure-profile.sh) and the [docker-compose.yml](docker-compose.yml) files expose some ports that are usually needed to known services (Prometheus, Kibana, Grafana). If you need to use other ports you'll need to add them to these files, before using them.
+
 ## aks-config-download.sh
 
 Often you're required to download the AKS config for one of the Team's clusters. It's a simple but convoluted operation. The [aks-config-download.sh tool](aks-config-download.sh) simplifies the procedure:

@@ -1,7 +1,12 @@
 dpt_bogus_path=${1:-"$HOME/dpt-bogus"}
 
 function docker_run {
-  docker run --rm -it \
+  docker run \
+    --rm \
+    -it \
+    -p 3000:3000 \
+    -p 9090:9090 \
+    -p 9093:9093 \
     -v $PWD:/devops \
     -v $HOME/.kube:/root/.kube \
     -v $HOME/.azure:/root/.azure \
